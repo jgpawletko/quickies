@@ -11,7 +11,7 @@
 #------------------------------------------------------------------------------
 
 hname=`hostname`
-hdate=`"+%Y%m%dT%H%M%S"`
+hdate=`date "+%Y%m%dT%H%M%S"`
 prefix='host-data'
 
 dirname="${prefix}-${hname}-${hdate}"
