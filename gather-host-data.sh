@@ -3,11 +3,16 @@
 # Time-stamp: <2014-06-13 23:44:27 pawletko>
 #
 # This script gathers information on a host and generates text files containing
-# the results.  
+# the results.  This can be useful during host migration to confirm that the
+# migrated host in the new environment has the same attributes as in the old
+# environment..
 #
 # This script should be run in a writable directory.
 # The user needs sudo privileges for some commands.
 #
+# Input : none
+# Output: a timestamped directory containing various text files
+# 
 #------------------------------------------------------------------------------
 
 hname=`hostname`
@@ -20,7 +25,8 @@ mkdir $dirname
 pushd $dirname > /dev/null
 
 
-# Even indices are commands to execute, odd indices are the target file names
+# Even-index elements: commands to execute
+# Odd-index  elements: target file names
 a[0]='for user in $(cut -f1 -d: /etc/passwd); do echo $user; sudo crontab -u $user -l; done'
 a[1]='crontab-list.txt'
 a[2]='sudo find /etc/cron.*'
