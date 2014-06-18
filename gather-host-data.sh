@@ -14,6 +14,15 @@
 # Output: a timestamped directory containing various text files
 # 
 #------------------------------------------------------------------------------
+case `uname` in
+    Linux)
+    ;;
+
+    *)
+    echo "ERROR: script is for Linux only"
+    exit 1
+    ;;
+esac
 
 hname=`hostname`
 hdate=`date "+%Y%m%dT%H%M%S"`
