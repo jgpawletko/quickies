@@ -1,6 +1,6 @@
 #!/bin/bash
 #------------------------------------------------------------------------------
-# Time-stamp: <2014-06-13 23:44:27 pawletko>
+# Time-stamp: <2014-06-18 18:09:15 pawletko>
 #
 # This script gathers information on a host and generates text files containing
 # the results.  This can be useful during host migration to confirm that the
@@ -14,9 +14,16 @@
 # Output: a timestamped directory containing various text files
 # 
 #------------------------------------------------------------------------------
-
-
 # SOLARIS VERSION SOLARIS VERSION SOLARIS VERSION
+case `uname` in
+    SunOS)
+    ;;
+
+    *)
+    echo "ERROR: script only for Solaris"
+    exit 1
+    ;;
+esac
 
 
 hname=`hostname`
@@ -39,8 +46,8 @@ a[4]='sudo ps '-ef
 a[5]='ps-list.txt'
 a[6]='/sbin/mount -p | sort'
 a[7]='fs-mounts-list.txt'
-a[8]='chkconfig'
-a[9]='chkconfig-list.txt'
+a[8]='ls -l /etc/init.d'
+a[9]='etc-init.d-list.txt'
 
 
 i=0
