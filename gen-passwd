@@ -1,0 +1,19 @@
+#!/bin/bash                                                                                                                                                                                                                                                                               
+WORDS_IN_PW=3
+WORDS_FILE=/usr/share/dict/words
+max_line=`cat $WORDS_FILE | wc -l`
+
+pw=''
+for ((i=0; i < $WORDS_IN_PW; i++))
+do
+  # $RANDOM is int b/w 0 and 32767,                                                                                                                                                                                                                                                       
+  # so generating larger number by multiplying                                                                                                                                                                                                                                            
+  # two randoms together                                                                                                                                                                                                                                                                  
+  let big_int=$[${RANDOM}*${RANDOM}]
+  idx=$(( $big_int % $max_line ))
+  cmd="${idx}q;d $WORDS_FILE"
+  pw="$pw `sed $cmd`"
+done
+
+echo $pw | tr 'A-Z' 'a-z' | tr 'aeiou' '@3!0U'
+exit 0
