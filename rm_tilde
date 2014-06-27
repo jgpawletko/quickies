@@ -1,0 +1,23 @@
+#!/bin/bash                                                                                                                                           
+
+#==============================================================================                                                                       
+# Utility Script to clean up emacs backup files                                                                                                       
+#==============================================================================                                                                       
+# script searches through directory structure rooted at "BASE_DIR"                                                                                    
+# looking for "pattern" and deleting matching files                                                                                                   
+
+
+BASE_DIR=`echo ~`
+
+# allow user to invoke with different base directory                                                                                                  
+if [ $# == 1 ]; then
+  BASE_DIR="$1"
+fi
+
+echo "using BASE_DIR: $BASE_DIR"
+
+find ${BASE_DIR} -name '*~' -print -exec rm '{}' \;
+
+#==============================================================================                                                                       
+# END OF SCRIPT                                                                                                                                       
+#==============================================================================                                                                       
